@@ -12,6 +12,16 @@ const createBidimensionalSquareArray = (rows) => {
 const getRandomState = (NumberOfPossibleStates) =>
   Math.floor(Math.random() * NumberOfPossibleStates);
 
+const fillGridCells = (grid, numberOfStates, assignStateCallback) => {
+  const gridToBeFilled = grid;
+  for (let i = 0; i < gridToBeFilled.length; i++) {
+    for (let j = 0; j < gridToBeFilled[i].length; j++) {
+      gridToBeFilled[i][j] = assignStateCallback(numberOfStates);
+    }
+  }
+  return gridToBeFilled;
+};
+
 // NOTE: TESTS createBidimensionalSquareArray
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
@@ -55,6 +65,19 @@ describe("Given a createBidimensionalSquareArray function", () => {
   });
   describe("When it receives 10", () => {
     test("Then the resulting objects in the resulting array have to have a length of 10", () => {
+      // Arrange
+      const rows = 10;
+      const expectedLength = 10;
+
+      // Act
+      const result = createBidimensionalSquareArray(rows)[0];
+
+      // Assert
+      expect(result).toHaveLength(expectedLength);
+    });
+  });
+  describe("When it receives 10 and getRandomState(2)", () => {
+    test("Then all the children array", () => {
       // Arrange
       const rows = 10;
       const expectedLength = 10;
@@ -121,6 +144,31 @@ describe("Given a getRandomState function", () => {
 
       // Assert
       expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+});
+
+// NOTE: TESTS fillGridCells
+
+describe("Given a fillGridCells function", () => {
+  describe("When it receives (createBidimensionalSquareArray(10), 2, getRandomState)", () => {
+    test("Then it should return an array of arrays filled exclusevely with 1 or 0", () => {
+      // Arrange
+      const gridToBeFilled = createBidimensionalSquareArray(10);
+      const possibleStates = 2;
+      const callbackFunction = getRandomState;
+
+      // Act
+      const everyrCellIs0or1 = fillGridCells(
+        gridToBeFilled,
+        possibleStates,
+        callbackFunction
+      )
+        .map((row) => row.every((number) => number === 1 || number === 0))
+        .every((row) => row);
+
+      // Assert
+      expect(everyrCellIs0or1).toBe(true);
     });
   });
 });
