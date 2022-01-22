@@ -1,0 +1,31 @@
+{
+  "name": "202201-w2-ch-we-berenguer-pou",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "jest-watch": "jest --watchAll --verbose",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beringar/202201-W2-CH-WE-berenguer-pou.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Beringar/202201-W2-CH-WE-berenguer-pou/issues"
+  },
+  "homepage": "https://github.com/Beringar/202201-W2-CH-WE-berenguer-pou#readme",
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "husky": "^7.0.0",
+    "jest": "^27.4.7"
+  }
+}
