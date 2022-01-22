@@ -14,4 +14,4 @@ branch-name: JS-grid-prototype
    d. TEST:if function createBidimensionalSquareArray(10) --> expect result[0].length === 10)
    e. write the function createBidimensionalSquareArray with one param (number of rows) 10 if we want a 10x10 grid.
    f. execute tests and refactor if necessary
-   g. create PR.
+   g. create PR. OK

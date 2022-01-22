@@ -1,3 +1,14 @@
+const createBidimensionalSquareArray = (rows) => {
+  const array = [];
+  for (let i = 0; i < rows; i++) {
+    array[i] = [];
+    for (let j = 0; j < rows; j++) {
+      array[i][j] = [];
+    }
+  }
+  return array;
+};
+
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
     test("Then it should return an array", () => {
