@@ -9,6 +9,7 @@ const createBidimensionalSquareArray = (rows) => {
   return array;
 };
 
+// NOTE: TESTS createBidimensionalSquareArray
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
     test("Then it should return an array", () => {
@@ -60,6 +61,63 @@ describe("Given a createBidimensionalSquareArray function", () => {
 
       // Assert
       expect(result).toHaveLength(expectedLength);
+    });
+  });
+});
+
+// NOTE: TESTS getRandomState
+
+describe("Given a getRandomState function", () => {
+  describe("When it receives 2", () => {
+    test("Then it should return a Number", () => {
+      // Arrange
+      const possibleStates = 2;
+      const expectedType = Number;
+
+      // Act
+      const result = getRandomState(possibleStates);
+
+      // Assert
+      expect(result).toBeInstanceOf(expectedType);
+    });
+  });
+  describe("When it receives 2", () => {
+    test("Then it should return an integer", () => {
+      // Arrange
+      const possibleStates = 2;
+      const expectedIsInt = true;
+
+      // Act
+      const result = getRandomState(possibleStates);
+
+      // Assert
+      expect(Number.isInteger(result).toBe(expectedIsInt));
+    });
+  });
+  describe("When it receives 10", () => {
+    test("Then it should return a value greater than or equal to 0", () => {
+      // Arrange
+      const possibleStates = 10;
+      const minValue = 0;
+
+      // Act
+      const result = getRandomState(possibleStates);
+
+      // Assert
+      expect(result).toBeGreaterThanOrEqual(minValue);
+    });
+  });
+  describe("When it receives 10", () => {
+    test("Then it should return a value less than or equal to 10", () => {
+      // Arrange
+      const possibleStates = 10;
+      const maxValue = 10;
+
+      // Act
+      const result = getRandomState(possibleStates);
+
+      // Assert
+      expect(result).toBeLessThanOrEqual(maxValue);
     });
   });
 });
