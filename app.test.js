@@ -13,12 +13,13 @@ const getRandomState = (NumberOfPossibleStates) =>
   Math.floor(Math.random() * NumberOfPossibleStates);
 
 const fillGridCells = (grid, numberOfStates, assignStateCallback) => {
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      grid[i][j] = assignStateCallback(numberOfStates);
+  const gridToBeFilled = grid;
+  for (let i = 0; i < gridToBeFilled.length; i++) {
+    for (let j = 0; j < gridToBeFilled[i].length; j++) {
+      gridToBeFilled[i][j] = assignStateCallback(numberOfStates);
     }
   }
-  return grid;
+  return gridToBeFilled;
 };
 
 // NOTE: TESTS createBidimensionalSquareArray
