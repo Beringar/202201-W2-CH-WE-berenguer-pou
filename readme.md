@@ -2,9 +2,7 @@
 
 I will put here the steps i'm going to develop:
 
-## prepare a 10x10 grid (to be bigger in the future) where cells will live (or die...)
-
-branch-name: JS-grid-prototype
+### Prepare a 10x10 grid (to be bigger in the future) where cells will live (or die...), fill it with random values (0 or 1)
 
 1. make a 10x10 matrix with a bidimensional array
 
@@ -23,5 +21,12 @@ branch-name: JS-grid-prototype
 - TEST:if function getRandomState(10) --> expect is >= 0
 - TEST:if function getRandomState(10) --> expect is <= 10
 - write the function getRandomState with one param (number of possible states) 2 if we want binary state (0 dead, 1 alive)
+- execute tests and refactor if necessary
+- create PR. Done.
+
+3. create a function to fill cell with an initial random value
+
+- TEST:if function fillGridCells (createBidimensionalSquareArray(10), 2, getRandomState) --> expect every cell has a value of 1 or 0.
+- create function fillGridCells --> params: array, rows,initialState
 - execute tests and refactor if necessary
 - create PR. Done.
