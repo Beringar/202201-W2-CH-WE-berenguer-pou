@@ -9,6 +9,9 @@ const createBidimensionalSquareArray = (rows) => {
   return array;
 };
 
+const getRandomState = (NumberOfPossibleStates) =>
+  Math.floor(Math.random() * NumberOfPossibleStates);
+
 // NOTE: TESTS createBidimensionalSquareArray
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
@@ -72,13 +75,13 @@ describe("Given a getRandomState function", () => {
     test("Then it should return a Number", () => {
       // Arrange
       const possibleStates = 2;
-      const expectedType = Number;
+      const expectedType = "number";
 
       // Act
       const result = getRandomState(possibleStates);
 
       // Assert
-      expect(result).toBeInstanceOf(expectedType);
+      expect(typeof result).toBe(expectedType);
     });
   });
   describe("When it receives 2", () => {
@@ -91,7 +94,7 @@ describe("Given a getRandomState function", () => {
       const result = getRandomState(possibleStates);
 
       // Assert
-      expect(Number.isInteger(result).toBe(expectedIsInt));
+      expect(Number.isInteger(result)).toBe(expectedIsInt);
     });
   });
   describe("When it receives 10", () => {
