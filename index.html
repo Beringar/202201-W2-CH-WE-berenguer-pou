@@ -16,6 +16,21 @@
       <canvas id="canvas" width="600" height="600"
         >Your browser does not support canva!</canvas
       >
+      <div class="speed-slider">
+        <div class="speed-slider__input-container">
+          <span class="speed-slider__range-text">50</span
+          ><input
+            id="speed-canva"
+            type="range"
+            min="50"
+            max="2000"
+            value="500"
+          /><span class="speed-slider__range-text">2000</span>
+        </div>
+        <p classe="speed-slider__text">
+          Life cycle speed: <span id="actual-speed-canva">500</span> ms
+        </p>
+      </div>
     </main>
     <script src="app.js"></script>
   </body>
