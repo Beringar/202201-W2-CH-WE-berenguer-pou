@@ -71,3 +71,10 @@ I will put here the steps i'm going to develop:
 - create PR. Done.
 
 3. created a life cycle test loop to check if functions are working as expected. (next steps --> make gridArray bigger and try to render via canva). Loop cycle test is OK.
+
+### implement HTML5 canvas / test if it's worth to implement instead of a table...
+
+1. create a function drawLifeCycleCanva --> params: the griod data, recalculated at every life cycle cycle
+
+- try to put on a 600px canvas every element/cell in the data array as a pixel in the canvas 2d context.
+- move the html table structure and js script up to this point to a subpage /table.html and /app-table.js
