@@ -69,3 +69,5 @@ I will put here the steps i'm going to develop:
 - execute tests and refactor if necessary
 - implement in app.js
 - create PR. Done.
+
+3. created a life cycle test loop to check if functions are working as expected. (next steps --> make gridArray bigger and try to render via canva). Loop cycle test is OK.
