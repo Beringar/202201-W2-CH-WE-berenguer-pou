@@ -23,20 +23,14 @@ const fillGridCells = (grid, numberOfStates, assignStateCallback) => {
   return gridToBeFilled;
 };
 
-const grid = fillGridCells(
-  createBidimensionalSquareArray(10),
-  2,
-  getRandomState
-);
-
-const renderDomTable = (rows) => {
+const renderDomTable = (rows, cellsGrid) => {
   const table = document.createElement("table");
   for (let i = 0; i < rows; i++) {
     const tr = document.createElement("tr");
     for (let j = 0; j < rows; j++) {
       const td = document.createElement("td");
       td.dataset.cellid = `${i}${j}`;
-      td.dataset.status = grid[i][j];
+      td.dataset.status = cellsGrid[i][j];
       tr.append(td);
     }
     table.append(tr);
@@ -114,4 +108,26 @@ const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
   }
 };
 
-document.querySelector("#testingtable").append(renderDomTable(10));
+let grid = fillGridCells(createBidimensionalSquareArray(20), 2, getRandomState);
+
+document.querySelector("#testingtable").append(renderDomTable(20, grid));
+
+const setNextCycle = (actualStateGrid) => {
+  grid = actualStateGrid.map((row, rowKey) =>
+    row.map((cell, cellKey) =>
+      getCellNewStatus(cell, getNeighbours(rowKey, cellKey, actualStateGrid))
+    )
+  );
+  return grid;
+};
+
+const runOnelifeCycle = () => {
+  const nextCycleStatus = setNextCycle(grid);
+  document.querySelector("#testingtable").innerHTML = "";
+  document.querySelector("#testingtable").append(renderDomTable(20, grid));
+  setTimeout(() => {
+    runOnelifeCycle();
+  }, 1000);
+};
+
+runOnelifeCycle();
