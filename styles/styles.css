@@ -4,11 +4,32 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 
-h1 {
-  font-size: 2rem;
+h1,
+h2,
+h3 {
   text-align: center;
 }
 
-h2 {
-  text-align: center;
+main {
+  display: flex;
+  justify-content: center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+[data-cellid] {
+  width: 30px;
+  height: 30px;
+}
+
+[data-status="1"] {
+  background-color: black;
 }

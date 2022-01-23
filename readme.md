@@ -30,3 +30,7 @@ I will put here the steps i'm going to develop:
 - create function fillGridCells --> params: array, rows,initialState
 - execute tests and refactor if necessary
 - create PR. Done.
+
+4. create html table for testing cells behavior
+
+(TODO: after all tests of life rules work --> remove table from DOM and render data on a canvas)
