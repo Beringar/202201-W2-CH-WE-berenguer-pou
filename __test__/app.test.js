@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const createBidimensionalSquareArray = (rows) => {
   const array = [];
   for (let i = 0; i < rows; i++) {
