@@ -109,9 +109,11 @@ const getRandomColor = () => {
   return color;
 };
 
+const ctx = canvasElement.getContext("2d");
+ctx.scale(3, 3);
+
 const drawLifeCycleCanva = (gridArray) => {
   if (canvasElement.getContext) {
-    const ctx = canvasElement.getContext("2d");
     ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     for (let row = 0; row < gridArray.length; row++) {
       for (let col = 0; col < gridArray.length; col++) {
