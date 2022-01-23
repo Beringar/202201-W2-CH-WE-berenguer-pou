@@ -109,14 +109,16 @@ const getRandomColor = () => {
   return color;
 };
 
+const ctx = canvasElement.getContext("2d");
+ctx.scale(2.5, 2.5);
+let msIntervalNewCycle = 500;
 const drawLifeCycleCanva = (gridArray) => {
   if (canvasElement.getContext) {
-    const ctx = canvasElement.getContext("2d");
     ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     for (let row = 0; row < gridArray.length; row++) {
       for (let col = 0; col < gridArray.length; col++) {
         if (grid[row][col] === 1) {
-          ctx.fillStyle = getRandomColor();
+          ctx.fillStyle = "#000000";
           ctx.fillRect(row, col, 1, 1);
         }
       }
@@ -133,11 +135,23 @@ const setNextCycle = (actualStateGrid) => {
   return grid;
 };
 
-const runOnelifeCycle = () => {
+const runLifeCycle = () => {
   drawLifeCycleCanva(setNextCycle(grid));
   setTimeout(() => {
-    runOnelifeCycle();
-  }, 100);
+    runLifeCycle();
+  }, msIntervalNewCycle);
 };
 
-runOnelifeCycle();
+runLifeCycle();
+
+const speedCanvaInputElement = document.querySelector("#speed-canva");
+const actualSpeedTextElement = document.querySelector("#actual-speed-canva");
+
+speedCanvaInputElement.addEventListener(
+  "input",
+  () => {
+    msIntervalNewCycle = speedCanvaInputElement.value;
+    actualSpeedTextElement.innerHTML = `${speedCanvaInputElement.value}`;
+  },
+  false
+);
