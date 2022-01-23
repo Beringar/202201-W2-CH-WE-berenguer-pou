@@ -68,11 +68,11 @@ const getDataArrayFromCanvaDrawing = () => {
   );
 };
 
-const el = document.getElementById("outside");
+const el = document.getElementById("#getImageData");
 el.addEventListener(
   "click",
   () => {
-    modifyText("four");
+    getDataArrayFromCanvaDrawing();
   },
   false
 );
