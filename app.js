@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const createBidimensionalSquareArray = (rows) => {
   const array = [];
   for (let i = 0; i < rows; i++) {
@@ -41,6 +42,50 @@ const renderDomTable = (rows) => {
     table.append(tr);
   }
   return table;
+};
+
+const getNeighbours = (positionRow, positionCol, gridArray) => {
+  let aliveNeighbours = 0;
+  // top left neighbour
+  if (positionRow !== 0) {
+    if (positionCol !== 0) {
+      aliveNeighbours += gridArray[positionRow - 1][positionCol - 1];
+    }
+  }
+  // top center neighbour
+  if (positionRow !== 0) {
+    aliveNeighbours += gridArray[positionRow - 1][positionCol];
+  }
+  // top right neighbour
+  if (positionRow !== 0) {
+    if (positionCol !== gridArray.length - 1) {
+      aliveNeighbours += gridArray[positionRow - 1][positionCol + 1];
+    }
+  }
+  // middle left neighbour
+  if (positionCol !== 0) {
+    aliveNeighbours += gridArray[positionRow][positionCol - 1];
+  }
+  // middle right neighbour
+  if (positionCol !== gridArray.length - 1) {
+    aliveNeighbours += gridArray[positionRow][positionCol + 1];
+  }
+  // bottom left neighbour
+  if (positionRow !== gridArray.length - 1) {
+    if (positionCol !== 0) {
+      aliveNeighbours += gridArray[positionRow + 1][positionCol - 1];
+    }
+  }
+  // bottom center
+  if (positionRow !== gridArray.length - 1) {
+    aliveNeighbours += gridArray[positionRow + 1][positionCol];
+  }
+  // bottom right
+  if (positionRow !== gridArray.length - 1) {
+    if (positionCol !== gridArray.length - 1)
+      aliveNeighbours += gridArray[positionRow + 1][positionCol + 1];
+  }
+  return aliveNeighbours;
 };
 
 document.querySelector("#testingtable").append(renderDomTable(10));
