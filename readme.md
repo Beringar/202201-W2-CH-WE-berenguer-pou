@@ -34,3 +34,22 @@ I will put here the steps i'm going to develop:
 4. create html table for testing cells behavior
 
 (TODO: after all tests of life rules work --> remove table from DOM and render data on a canvas, or try it...)
+
+### Define functions (as modularized as possible) to check/test life rules for a particular cell for each life cycle
+
+1. create a function getNeighbours --> params: cell position and array to search/count one cell's neighbours
+
+- TEST:if function getNeighbours(3,4,grid) --> expect a number
+- TEST:if function getNeighbours(8,2,grid) --> expect an integer
+- TEST:if function getNeighbours(0,0,grid) --> expect is >= 0
+- TEST:if function getNeighbours(0,0,grid) --> expect is <= 3
+- TEST:if function getNeighbours(9,9,grid) --> expect is >= 0
+- TEST:if function getNeighbours(9,9,grid) --> expect is <= 3
+- TEST:if function getNeighbours(0,1,grid) --> expect is >= 0
+- TEST:if function getNeighbours(0,1,grid) --> expect is <= 5
+- TEST:if function getNeighbours(5,5,grid) --> expect is >= 0
+- TEST:if function getNeighbours(5,5,grid) --> expect is <= 8
+- create function getNeighbours --> params: x,y,array(where cell is in, I need this to check corners of grid)
+- execute tests and refactor if necessary
+- implement in app.js
+- create PR. Done.

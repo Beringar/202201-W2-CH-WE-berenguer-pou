@@ -46,6 +46,49 @@ const renderDomTable = (rows) => {
 
 // document.querySelector("#testingtable").append(renderDomTable(10));
 
+const getNeighbours = (positionRow, positionCol, gridArray) => {
+  let aliveNeighbours = 0;
+  // top left neighbour
+  if (positionRow !== 0) {
+    if (positionCol !== 0) {
+      aliveNeighbours += gridArray[positionRow - 1][positionCol - 1];
+    }
+  }
+  // top center neighbour
+  if (positionRow !== 0) {
+    aliveNeighbours += gridArray[positionRow - 1][positionCol];
+  }
+  // top right neighbour
+  if (positionRow !== 0) {
+    if (positionCol !== gridArray.length - 1) {
+      aliveNeighbours += gridArray[positionRow - 1][positionCol + 1];
+    }
+  }
+  // middle left neighbour
+  if (positionCol !== 0) {
+    aliveNeighbours += gridArray[positionRow][positionCol - 1];
+  }
+  // middle right neighbour
+  if (positionCol !== gridArray.length - 1) {
+    aliveNeighbours += gridArray[positionRow][positionCol + 1];
+  }
+  // bottom left neighbour
+  if (positionRow !== gridArray.length - 1) {
+    if (positionCol !== 0) {
+      aliveNeighbours += gridArray[positionRow + 1][positionCol - 1];
+    }
+  }
+  // bottom center
+  if (positionRow !== gridArray.length - 1) {
+    aliveNeighbours += gridArray[positionRow + 1][positionCol];
+  }
+  // bottom right
+  if (positionRow !== gridArray.length - 1) {
+    if (positionCol !== gridArray.length - 1)
+      aliveNeighbours += gridArray[positionRow + 1][positionCol + 1];
+  }
+  return aliveNeighbours;
+};
 // NOTE: TESTS createBidimensionalSquareArray
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
@@ -193,6 +236,209 @@ describe("Given a fillGridCells function", () => {
 
       // Assert
       expect(everyrCellIs0or1).toBe(true);
+    });
+  });
+});
+
+// NOTE: TESTS getNeighbours
+
+describe("Given a getNeighbours function", () => {
+  describe("When it receives 3,4,grid", () => {
+    test("Then it should return a Number", () => {
+      // Arrange
+      const positionRow = 3;
+      const positionCol = 4;
+      const arrayWhereCellLives = grid;
+      const expectedType = "number";
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(typeof result).toBe(expectedType);
+    });
+  });
+  describe("When it receives 8,2,grid", () => {
+    test("Then it should return an integer", () => {
+      // Arrange
+      const positionRow = 8;
+      const positionCol = 2;
+      const arrayWhereCellLives = grid;
+      const expectedIsInt = true;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(Number.isInteger(result)).toBe(expectedIsInt);
+    });
+  });
+  describe("When it receives 0,0,grid", () => {
+    test("Then it should return a value greater than or equal to 0", () => {
+      // Arrange
+      const positionRow = 0;
+      const positionCol = 0;
+      const arrayWhereCellLives = grid;
+      const minValue = 0;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeGreaterThanOrEqual(minValue);
+    });
+  });
+  describe("When it receives 0,0,grid", () => {
+    test("Then it should return a value less than or equal to 3", () => {
+      // Arrange
+      const positionRow = 0;
+      const positionCol = 0;
+      const arrayWhereCellLives = grid;
+      let maxValue = 8;
+      if (positionRow === grid.length - 1 || positionRow === 0) maxValue -= 3;
+      if (positionCol === grid.length - 1 || positionCol === 0) maxValue -= 2;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+  describe("When it receives 9,9,grid", () => {
+    test("Then it should return a value greater than or equal to 0", () => {
+      // Arrange
+      const positionRow = 9;
+      const positionCol = 9;
+      const arrayWhereCellLives = grid;
+      const minValue = 0;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeGreaterThanOrEqual(minValue);
+    });
+  });
+  describe("When it receives 9,9,grid", () => {
+    test("Then it should return a value less than or equal to 3", () => {
+      // Arrange
+      const positionRow = 9;
+      const positionCol = 9;
+      const arrayWhereCellLives = grid;
+      let maxValue = 8;
+      if (positionRow === grid.length - 1 || positionRow === 0) maxValue -= 3;
+      if (positionCol === grid.length - 1 || positionCol === 0) maxValue -= 2;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+  describe("When it receives 0,1,grid", () => {
+    test("Then it should return a value greater than or equal to 0", () => {
+      // Arrange
+      const positionRow = 0;
+      const positionCol = 1;
+      const arrayWhereCellLives = grid;
+      const minValue = 0;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeGreaterThanOrEqual(minValue);
+    });
+  });
+  describe("When it receives 0,1,grid", () => {
+    test("Then it should return a value less than or equal to 5", () => {
+      // Arrange
+      const positionRow = 0;
+      const positionCol = 1;
+      const arrayWhereCellLives = grid;
+      let maxValue = 8;
+      if (positionRow === grid.length - 1 || positionRow === 0) maxValue -= 3;
+      if (positionCol === grid.length - 1 || positionCol === 0) maxValue -= 2;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+  describe("When it receives 5,5,grid", () => {
+    test("Then it should return a value greater than or equal to 0", () => {
+      // Arrange
+      const positionRow = 5;
+      const positionCol = 5;
+      const arrayWhereCellLives = grid;
+      const minValue = 0;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeGreaterThanOrEqual(minValue);
+    });
+  });
+  describe("When it receives 5,5,grid", () => {
+    test("Then it should return a value less than or equal to 8", () => {
+      // Arrange
+      const positionRow = 5;
+      const positionCol = 5;
+      const arrayWhereCellLives = grid;
+      let maxValue = 8;
+      if (positionRow === grid.length - 1 || positionRow === 0) maxValue -= 3;
+      if (positionCol === grid.length - 1 || positionCol === 0) maxValue -= 2;
+
+      // Act
+      const result = getNeighbours(
+        positionRow,
+        positionCol,
+        arrayWhereCellLives
+      );
+
+      // Assert
+      expect(result).toBeLessThanOrEqual(maxValue);
     });
   });
 });
