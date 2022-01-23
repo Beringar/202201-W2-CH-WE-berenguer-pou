@@ -33,4 +33,4 @@ I will put here the steps i'm going to develop:
 
 4. create html table for testing cells behavior
 
-(TODO: after all tests of life rules work --> remove table from DOM and render data on a canvas)
+(TODO: after all tests of life rules work --> remove table from DOM and render data on a canvas, or try it...)

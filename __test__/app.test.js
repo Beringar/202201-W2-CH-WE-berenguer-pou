@@ -1,7 +1,3 @@
-/*
- * @jest-environment jsdom
- */
-
 const createBidimensionalSquareArray = (rows) => {
   const array = [];
   for (let i = 0; i < rows; i++) {
@@ -47,7 +43,7 @@ const renderDomTable = (rows) => {
   return table;
 };
 
-document.querySelector("#testingtable").append(renderDomTable(10));
+// document.querySelector("#testingtable").append(renderDomTable(10));
 
 // NOTE: TESTS createBidimensionalSquareArray
 describe("Given a createBidimensionalSquareArray function", () => {
