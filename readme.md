@@ -37,7 +37,7 @@ I will put here the steps i'm going to develop:
 
 ### Define functions (as modularized as possible) to check/test life rules for a particular cell for each life cycle
 
-1. create a function getNeighbours --> params: cell position and array to search/count one cell's neighbours
+1. create a function getNeighbours --> params: cell position and array to search/count one cell's neighbours --> returns a number between 0 and 8
 
 - TEST:if function getNeighbours(3,4,grid) --> expect a number
 - TEST:if function getNeighbours(8,2,grid) --> expect an integer
@@ -50,6 +50,22 @@ I will put here the steps i'm going to develop:
 - TEST:if function getNeighbours(5,5,grid) --> expect is >= 0
 - TEST:if function getNeighbours(5,5,grid) --> expect is <= 8
 - create function getNeighbours --> params: x,y,array(where cell is in, I need this to check corners of grid)
+- execute tests and refactor if necessary
+- implement in app.js
+- create PR. Done.
+
+2. create a function getCellNewStatus --> params: lifeStatus, totalNeighbours --> returns 0 or 1 (dead, alive)
+
+- TEST:if function getCellNewStatus(0,0) --> expect 0 // remains dead
+- TEST:if function getCellNewStatus(0,3) --> expect 1 // the revenant
+- TEST:if function getCellNewStatus(0,8) --> expect 0 // remains dead
+- TEST:if function getCellNewStatus(1,0) --> expect 0 // dies of loneliness
+- TEST:if function getCellNewStatus(1,1) --> expect 0 // dies of loneliness
+- TEST:if function getCellNewStatus(1,2) --> expect 1 // remains alive
+- TEST:if function getCellNewStatus(1,3) --> expect 1 // remains alive
+- TEST:if function getCellNewStatus(1,4) --> expect 0 // dies of overcrowding
+- TEST:if function getCellNewStatus(1,8) --> expect 0 // dies of overcrowding
+
 - execute tests and refactor if necessary
 - implement in app.js
 - create PR. Done.

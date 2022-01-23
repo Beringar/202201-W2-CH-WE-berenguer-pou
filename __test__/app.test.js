@@ -89,7 +89,9 @@ const getNeighbours = (positionRow, positionCol, gridArray) => {
   }
   return aliveNeighbours;
 };
+
 // NOTE: TESTS createBidimensionalSquareArray
+
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
     test("Then it should return an array", () => {
@@ -439,6 +441,137 @@ describe("Given a getNeighbours function", () => {
 
       // Assert
       expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+
+  // NOTES: getCellNewStatus tests for
+
+  describe("Given a getCellNewStatus function", () => {
+    describe("When it receives 0,0", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 0;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 0,3", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 3;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 0,8", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 8;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,0", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 0;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,1", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 1;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,2", () => {
+      test("Then it should return 1", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 2;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,3", () => {
+      test("Then it should return 1", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 3;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,4", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 4;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,8", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 8;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
     });
   });
 });
