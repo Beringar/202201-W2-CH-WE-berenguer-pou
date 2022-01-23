@@ -74,7 +74,15 @@ I will put here the steps i'm going to develop:
 
 ### implement HTML5 canvas / test if it's worth to implement instead of a table...
 
-1. create a function drawLifeCycleCanva --> params: the griod data, recalculated at every life cycle cycle
+1. create a function drawLifeCycleCanva --> params: the gridArray, recalculated at every life cycle cycle
 
 - try to put on a 600px canvas every element/cell in the data array as a pixel in the canvas 2d context.
 - move the html table structure and js script up to this point to a subpage /table.html and /app-table.js
+
+### features: every new cell rendered in a random color
+
+1. create a function getRandomColor --> no params. Returns a color in hex format as a string.
+
+- call getRandomColor at "drawing" time in drawLifeCycle function.
+- tests: pending
+- TODO: improvement: add new color only to reborn cells :)

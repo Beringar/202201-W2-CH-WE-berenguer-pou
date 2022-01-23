@@ -100,6 +100,15 @@ let grid = fillGridCells(
 );
 const canvasElement = document.querySelector("#canvas");
 
+const getRandomColor = () => {
+  let color = "#";
+  const letters = "ABCDEF0123456789";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
 const drawLifeCycleCanva = (gridArray) => {
   if (canvasElement.getContext) {
     const ctx = canvasElement.getContext("2d");
@@ -107,7 +116,7 @@ const drawLifeCycleCanva = (gridArray) => {
     for (let row = 0; row < gridArray.length; row++) {
       for (let col = 0; col < gridArray.length; col++) {
         if (grid[row][col] === 1) {
-          ctx.fillStyle = "#000000";
+          ctx.fillStyle = getRandomColor();
           ctx.fillRect(row, col, 1, 1);
         }
       }
