@@ -10,9 +10,16 @@ h3 {
   text-align: center;
 }
 
+a {
+  text-align: center;
+}
+
 main {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-content: center;
 }
 
 table {
@@ -32,4 +39,8 @@ td {
 
 [data-status="1"] {
   background-color: black;
+}
+
+canvas {
+  border: 2px solid black;
 }

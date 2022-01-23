@@ -23,6 +23,21 @@ const fillGridCells = (grid, numberOfStates, assignStateCallback) => {
   return gridToBeFilled;
 };
 
+const renderDomTable = (rows, cellsGrid) => {
+  const table = document.createElement("table");
+  for (let i = 0; i < rows; i++) {
+    const tr = document.createElement("tr");
+    for (let j = 0; j < rows; j++) {
+      const td = document.createElement("td");
+      td.dataset.cellid = `${i}${j}`;
+      td.dataset.status = cellsGrid[i][j];
+      tr.append(td);
+    }
+    table.append(tr);
+  }
+  return table;
+};
+
 const getNeighbours = (positionRow, positionCol, gridArray) => {
   let aliveNeighbours = 0;
   // top left neighbour
@@ -93,22 +108,22 @@ const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
   }
 };
 
-let grid = fillGridCells(
-  createBidimensionalSquareArray(600),
-  2,
-  getRandomState
-);
-const canvasElement = document.querySelector("#canvas");
+let grid = fillGridCells(createBidimensionalSquareArray(20), 2, getRandomState);
 
-const drawLifeCycleCanva = (gridArray) => {
+document.querySelector("#testingtable").append(renderDomTable(20, grid));
+
+const canvasElement = document.querySelector("#canvas");
+const drawLifeCycleCanva = () => {
   if (canvasElement.getContext) {
     const ctx = canvasElement.getContext("2d");
     ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    for (let row = 0; row < gridArray.length; row++) {
-      for (let col = 0; col < gridArray.length; col++) {
+    for (let row = 0; row < grid.length; row++) {
+      // iterate through rows
+      for (let col = 0; col < grid.length; col++) {
+        // iterate through columns
         if (grid[row][col] === 1) {
-          ctx.fillStyle = "#000000";
-          ctx.fillRect(row, col, 1, 1);
+          ctx.fillStyle = "#FF0000";
+          ctx.fillRect(row, col, 2, 2);
         }
       }
     }
@@ -125,10 +140,12 @@ const setNextCycle = (actualStateGrid) => {
 };
 
 const runOnelifeCycle = () => {
-  drawLifeCycleCanva(setNextCycle(grid));
+  const nextCycleStatus = setNextCycle(grid);
+  document.querySelector("#testingtable").innerHTML = "";
+  document.querySelector("#testingtable").append(renderDomTable(20, grid));
   setTimeout(() => {
     runOnelifeCycle();
-  }, 100);
+  }, 1000);
 };
 
 runOnelifeCycle();
