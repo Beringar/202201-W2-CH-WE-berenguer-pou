@@ -78,3 +78,11 @@ I will put here the steps i'm going to develop:
 
 - try to put on a 600px canvas every element/cell in the data array as a pixel in the canvas 2d context.
 - move the html table structure and js script up to this point to a subpage /table.html and /app-table.js
+
+### features: every new cell rendered in a random color
+
+1. create a function getRandomColor --> no params. Returns a color in hex format as a string.
+
+- call getRandomColor at "drawing" time in drawLifeCycle function.
+- tests: pending
+- TODO: improvement: add new color only to reborn cells :)
