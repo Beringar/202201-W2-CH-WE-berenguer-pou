@@ -88,4 +88,30 @@ const getNeighbours = (positionRow, positionCol, gridArray) => {
   return aliveNeighbours;
 };
 
+const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
+  if (actualStatus === 0) {
+    switch (numberOfNeighbours) {
+      case 3:
+        return 1; // dead + 3 neighbours --> the revenant!
+      default:
+        return 0;
+    }
+  }
+  switch (numberOfNeighbours) {
+    case 0:
+    case 1:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return 0; // (0-1) --> die of lonelines (4-8) --> of overcrowding
+    case 2:
+    case 3:
+      return 1; // (2-3) --> remains alive
+    default:
+      return 0;
+  }
+};
+
 document.querySelector("#testingtable").append(renderDomTable(10));

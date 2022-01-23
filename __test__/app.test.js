@@ -89,7 +89,35 @@ const getNeighbours = (positionRow, positionCol, gridArray) => {
   }
   return aliveNeighbours;
 };
+
+const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
+  if (actualStatus === 0) {
+    switch (numberOfNeighbours) {
+      case 3:
+        return 1; // dead + 3 neighbours --> the revenant!
+      default:
+        return 0;
+    }
+  }
+  switch (numberOfNeighbours) {
+    case 0:
+    case 1:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+      return 0; // (0-1) --> die of lonelines (4-8) --> of overcrowding
+    case 2:
+    case 3:
+      return 1; // (2-3) --> remains alive
+    default:
+      return 0;
+  }
+};
+
 // NOTE: TESTS createBidimensionalSquareArray
+
 describe("Given a createBidimensionalSquareArray function", () => {
   describe("When it receives 10", () => {
     test("Then it should return an array", () => {
@@ -439,6 +467,137 @@ describe("Given a getNeighbours function", () => {
 
       // Assert
       expect(result).toBeLessThanOrEqual(maxValue);
+    });
+  });
+
+  // NOTES: getCellNewStatus tests for
+
+  describe("Given a getCellNewStatus function", () => {
+    describe("When it receives 0,0", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 0;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 0,3", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 3;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 0,8", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 0;
+        const cellNeighbours = 8;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,0", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 0;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,1", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 1;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,2", () => {
+      test("Then it should return 1", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 2;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,3", () => {
+      test("Then it should return 1", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 3;
+        const expectedNewStatus = 1;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,4", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 4;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
+    });
+    describe("When it receives 1,8", () => {
+      test("Then it should return 0", () => {
+        // Arrange
+        const actualStatus = 1;
+        const cellNeighbours = 8;
+        const expectedNewStatus = 0;
+
+        // Act
+        const cellStatus = getCellNewStatus(actualStatus, cellNeighbours);
+
+        // Assert
+        expect(cellStatus).toEqual(expectedNewStatus);
+      });
     });
   });
 });
