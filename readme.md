@@ -38,7 +38,6 @@ I will put here the steps i'm going to develop:
 ### Define functions (as modularized as possible) to check/test life rules for a particular cell for each life cycle
 
 1. create a function getNeighbours --> params: cell position and array to search/count one cell's neighbours
-   (test for a grid 10x10)
 
 - TEST:if function getNeighbours(3,4,grid) --> expect a number
 - TEST:if function getNeighbours(8,2,grid) --> expect an integer
