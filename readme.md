@@ -86,3 +86,9 @@ I will put here the steps i'm going to develop:
 - call getRandomColor at "drawing" time in drawLifeCycle function.
 - tests: pending
 - TODO: improvement: add new color only to reborn cells :)
+
+2. create a color picker (or something like) to pick a color for the new born cells, those mantaining life state take default color (by now: #000000)
+
+### features: add a cycle speed input range / listener
+
+1. create input range element to change cycle speed (range from 50ms to 2000ms --> default value at 500ms). OK
