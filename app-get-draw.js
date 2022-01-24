@@ -45,7 +45,7 @@ function init(container, width, height) {
 }
 
 const container = document.getElementById("canvas");
-init(container, 600, 600);
+init(container, 300, 300);
 
 const chunkArray = (arr, size) =>
   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
@@ -53,12 +53,12 @@ const chunkArray = (arr, size) =>
   );
 
 const getDataArrayFromCanvaDrawing = () => {
-  const imageData = ctx.getImageData(0, 0, 600, 600).data;
+  const imageData = ctx.getImageData(0, 0, 300, 300).data;
   const onlyBlackPixelData = [];
   for (let i = 3; i < imageData.length; i += 4) {
     onlyBlackPixelData.push(imageData[i]);
   }
-  return chunkArray(onlyBlackPixelData, 600).map((row) =>
+  return chunkArray(onlyBlackPixelData, 300).map((row) =>
     row.map((cell) => {
       if (cell === 255) {
         return 1;
