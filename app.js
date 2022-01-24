@@ -1,4 +1,9 @@
 /* eslint-disable no-unused-vars */
+let livingCellsStart = 0;
+let totalLivingCells = 0;
+let newBabyCells = 0;
+let generations = 0;
+
 let runLifeCycleSetTimeOut;
 const createBidimensionalSquareArray = (rows) => {
   const array = [];
@@ -16,11 +21,17 @@ const getRandomState = (NumberOfPossibleStates) =>
 
 const fillGridCells = (grid, numberOfStates, assignStateCallback) => {
   const gridToBeFilled = grid;
+  livingCellsStart = 0;
   for (let i = 0; i < gridToBeFilled.length; i++) {
     for (let j = 0; j < gridToBeFilled[i].length; j++) {
       gridToBeFilled[i][j] = assignStateCallback(numberOfStates);
+      if (gridToBeFilled[i][j] === 1) {
+        livingCellsStart++;
+        totalLivingCells++;
+      }
     }
   }
+  document.querySelector("#livingCellsStart").textContent = livingCellsStart;
   return gridToBeFilled;
 };
 
@@ -72,6 +83,7 @@ const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
   if (actualStatus === 0) {
     switch (numberOfNeighbours) {
       case 3:
+        totalLivingCells++;
         return 1; // dead + 3 neighbours --> the revenant!
       default:
         return 0;
@@ -88,6 +100,7 @@ const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
       return 0; // (0-1) --> die of lonelines (4-8) --> of overcrowding
     case 2:
     case 3:
+      totalLivingCells++;
       return 1; // (2-3) --> remains alive
     default:
       return 0;
@@ -113,17 +126,23 @@ const getRandomColor = () => {
 const ctx = canvasElement.getContext("2d");
 let msIntervalNewCycle = 500;
 const drawLifeCycleCanva = (gridArray) => {
+  generations++;
+  newBabyCells = 0;
   if (canvasElement.getContext) {
     ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     for (let row = 0; row < gridArray.length; row++) {
       for (let col = 0; col < gridArray.length; col++) {
         if (grid[row][col] === 1) {
+          newBabyCells++;
           ctx.fillStyle = "#ff0066";
           ctx.fillRect(row, col, 1, 1);
         }
       }
     }
   }
+  document.querySelector("#totalLivingCells").textContent = totalLivingCells;
+  document.querySelector("#newBabyCells").textContent = newBabyCells;
+  document.querySelector("#generations").textContent = generations;
 };
 
 const setNextCycle = (actualStateGrid) => {
@@ -234,6 +253,14 @@ el.addEventListener(
 
 const stopCycle = () => {
   clearTimeout(runLifeCycleSetTimeOut);
+};
+
+const restart = () => {
+  livingCellsStart = 0;
+  totallivingCells = 0;
+  newBabyCells = 0;
+  generations = 0;
+  stopCycle();
 };
 
 startCycle();

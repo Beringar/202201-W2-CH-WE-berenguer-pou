@@ -24,6 +24,12 @@ main > section {
   padding: 30px 20px;
 }
 
+#getImageData {
+  padding: 8px 10px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
 #canvas {
   width: 500px;
 }
