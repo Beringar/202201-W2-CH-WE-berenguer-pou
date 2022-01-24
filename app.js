@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-unused-vars */
 let livingCellsStart = 0;
 let totalLivingCells = 0;
@@ -257,7 +258,7 @@ const stopCycle = () => {
 
 const restart = () => {
   livingCellsStart = 0;
-  totallivingCells = 0;
+  totalLivingCells = 0;
   newBabyCells = 0;
   generations = 0;
   stopCycle();
