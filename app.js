@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+let runLifeCycleSetTimeOut;
 const createBidimensionalSquareArray = (rows) => {
   const array = [];
   for (let i = 0; i < rows; i++) {
@@ -94,7 +95,7 @@ const getCellNewStatus = (actualStatus, numberOfNeighbours) => {
 };
 
 let grid = fillGridCells(
-  createBidimensionalSquareArray(600),
+  createBidimensionalSquareArray(300),
   2,
   getRandomState
 );
@@ -110,7 +111,6 @@ const getRandomColor = () => {
 };
 
 const ctx = canvasElement.getContext("2d");
-ctx.scale(2.5, 2.5);
 let msIntervalNewCycle = 500;
 const drawLifeCycleCanva = (gridArray) => {
   if (canvasElement.getContext) {
@@ -118,7 +118,7 @@ const drawLifeCycleCanva = (gridArray) => {
     for (let row = 0; row < gridArray.length; row++) {
       for (let col = 0; col < gridArray.length; col++) {
         if (grid[row][col] === 1) {
-          ctx.fillStyle = "#000000";
+          ctx.fillStyle = "#ff0066";
           ctx.fillRect(row, col, 1, 1);
         }
       }
@@ -135,14 +135,12 @@ const setNextCycle = (actualStateGrid) => {
   return grid;
 };
 
-const runLifeCycle = () => {
-  drawLifeCycleCanva(setNextCycle(grid));
-  setTimeout(() => {
-    runLifeCycle();
+const startCycle = () => {
+  runLifeCycleSetTimeOut = setTimeout(() => {
+    drawLifeCycleCanva(setNextCycle(grid));
+    startCycle();
   }, msIntervalNewCycle);
 };
-
-runLifeCycle();
 
 const speedCanvaInputElement = document.querySelector("#speed-canva");
 const actualSpeedTextElement = document.querySelector("#actual-speed-canva");
@@ -155,3 +153,87 @@ speedCanvaInputElement.addEventListener(
   },
   false
 );
+
+function createCanvas(parent, width, height) {
+  const canvas = {};
+  canvas.node = document.createElement("canvas");
+  canvas.context = canvas.node.getContext("2d");
+  canvas.node.width = width || 100;
+  canvas.node.height = height || 100;
+  parent.appendChild(canvas.node);
+  return canvas;
+}
+let ctxDraw = null;
+function init(container, width, height) {
+  const canvas = createCanvas(container, width, height);
+  ctxDraw = canvas.context;
+
+  ctxDraw.fillCircle = function (x, y, radius, fillColor) {
+    this.fillStyle = fillColor;
+    this.beginPath();
+    this.moveTo(x, y);
+    this.arc(x, y, radius, 0, Math.PI * 2, false);
+    this.fill();
+  };
+  ctxDraw.clearTo = function (fillColorClear) {
+    ctxDraw.fillStyle = fillColorClear;
+    ctxDraw.fillRect(0, 0, width, height);
+  };
+
+  // bind mouse events
+  canvas.node.onmousemove = function (e) {
+    if (!canvas.isDrawing) {
+      return;
+    }
+    const x = e.pageX - this.offsetLeft;
+    const y = e.pageY - this.offsetTop;
+    const radius = 10;
+    const fillColorDraw = "#000000";
+    ctxDraw.fillCircle(x, y, radius, fillColorDraw);
+  };
+  canvas.node.onmousedown = function () {
+    canvas.isDrawing = true;
+  };
+  canvas.node.onmouseup = function () {
+    canvas.isDrawing = false;
+  };
+}
+
+const container = document.getElementById("draw-canvas");
+init(container, 300, 300);
+
+const chunkArray = (arr, size) =>
+  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+    arr.slice(i * size, i * size + size)
+  );
+
+const getDataArrayFromCanvaDrawing = () => {
+  const imageData = ctxDraw.getImageData(0, 0, 300, 300).data;
+  const onlyBlackPixelData = [];
+  for (let i = 3; i < imageData.length; i += 4) {
+    onlyBlackPixelData.push(imageData[i]);
+  }
+  return chunkArray(onlyBlackPixelData, 300).map((row) =>
+    row.map((cell) => {
+      if (cell === 255) {
+        return 1;
+      }
+      return 0;
+    })
+  );
+};
+
+const el = document.querySelector("#getImageData");
+el.addEventListener(
+  "click",
+  () => {
+    grid = getDataArrayFromCanvaDrawing();
+  },
+  false
+);
+
+const stopCycle = () => {
+  clearTimeout(runLifeCycleSetTimeOut);
+};
+
+startCycle();
